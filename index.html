@@ -184,7 +184,7 @@ tr:hover td { background: var(--surface); }
 <script>
 const API_KEY = 'AIzaSyBdJ6FWPRbFEKNhtoY3a4moWI9EdyyXox8';
 const SHEET_ID = '18mZs5ViTQTU9tlx681_XKitxms8Rv17bA1d7qYvkv10';
-const SHEET_NAME = 'Estado de las Búsquedas por Empresa';
+
 
 let allEmpresas = [];
 let currentFilter = 'todos';
@@ -211,7 +211,7 @@ async function loadSheet() {
   document.getElementById('sync-status').textContent = 'Actualizando...';
   document.getElementById('error-msg').style.display = 'none';
 
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(SHEET_NAME)}?key=${API_KEY}`;
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/A3%3AF60?key=${API_KEY}`;
   try {
     const res = await fetch(url);
     if (!res.ok) throw new Error(`Error ${res.status}`);
@@ -219,7 +219,7 @@ async function loadSheet() {
     const rows = data.values || [];
 
     allEmpresas = [];
-    for (let i = 2; i < rows.length; i++) {
+    for (let i = 0; i < rows.length; i++) {
       const r = rows[i];
       if (!r[0] || r[0].trim() === '' || r[0] === 'Cantidad') continue;
       const empresa = r[0]?.trim();
